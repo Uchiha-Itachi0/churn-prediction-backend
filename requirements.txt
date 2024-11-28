@@ -1,0 +1,14 @@
+django
+djangorestframework
+django-cors-headers
+pandas
+numpy
+tensorflow
+scikit-learn
+channels
+channels_redis
+python-decouple
+celery
+daphne
+redis
+gunicorn
