@@ -10,7 +10,7 @@ channel_layer = get_channel_layer()
 
 
 @shared_task
-def train_model(model_id):
+def train_model(model_id, data):
     from django.utils.log import logging
     logger = logging.getLogger(__name__)
 
@@ -19,7 +19,7 @@ def train_model(model_id):
 
     try:
         # Read data
-        df = pd.read_csv(ml_model.file.path)
+        df = pd.DataFrame.from_dict(data)
 
         # Preprocess data
         preprocessor = DataPreprocessor()
