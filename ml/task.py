@@ -40,8 +40,14 @@ def train_model(model_id, data):
         model, history = trainer.train(X_train, X_test, y_train, y_test)
 
         # Update model status and accuracy
+        ml_model.accuracy = history['accuracy'][-1]  # Save final accuracy
+        ml_model.training_metrics = {
+            'accuracy': history['accuracy'],
+            'loss': history['loss'],
+            'val_accuracy': history['val_accuracy'],
+            'val_loss': history['val_loss'],
+        }
         ml_model.status = 'completed'
-        ml_model.accuracy = float(history.history['val_accuracy'][-1])
         ml_model.save()
 
     except Exception as e:

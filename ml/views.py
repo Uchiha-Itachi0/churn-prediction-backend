@@ -70,15 +70,18 @@ class MLModelViewSet(viewsets.ModelViewSet):
             if page is not None:
                 paginated_response = paginator.get_paginated_response(page).data
                 response_data.update(paginated_response)
-                return Response(response_data)  # Explicitly return a Response object
+                response_data['training_metrics'] = model.training_metrics
+                return Response(response_data)
 
             # If no pagination, just return the full data
-            response_data['csv_content'] = model.csv_content  # Full content if pagination isn't used
-            return Response(response_data)  # Explicitly return a Response object
+            response_data['csv_content'] = model.csv_content
+            response_data['training_metrics'] = model.training_metrics
+            return Response(response_data)
         else:
             return Response({
                 'id': model.id,
                 'status': model.status,
                 'message': 'Model training is in progress.'
             })
+
 

@@ -28,7 +28,7 @@ class ModelTrainer:
 
         return model
 
-    def train(self, X_train, X_test, y_train, y_test, epochs=10):
+    def train(self, X_train, X_test, y_train, y_test, epochs=100):
         model = self.create_model((X_train.shape[1],))
 
         class ProgressCallback(Callback):
@@ -51,4 +51,5 @@ class ModelTrainer:
             verbose=0
         )
 
-        return model, history
+        # Return training history (accuracy and loss)
+        return model, history.history
